@@ -66,13 +66,21 @@
               "isRequired": false,
               "attributes": []
             },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "NoteStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
             "createdAt": {
               "name": "createdAt",
               "isArray": false,
               "type": "AWSDateTime",
               "isRequired": false,
-              "attributes": [],
-              "isReadOnly": true
+              "attributes": []
             },
             "updatedAt": {
               "name": "updatedAt",
@@ -91,6 +99,16 @@
               "properties": {}
             },
             {
+              "type": "key",
+              "properties": {
+                "name": "notesByCreatedAt",
+                "queryField": "listNoteByCreatedAt",
+                "fields": [
+                  "createdAt"
+                ]
+              }
+            },
+            {
               "type": "auth",
               "properties": {
                 "rules": [
@@ -105,6 +123,12 @@
                       "delete",
                       "read"
                     ]
+                  },
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "read"
+                    ]
                   }
                 ]
               }
@@ -117,21 +141,37 @@
           }
         }
       },
-      "enums": {},
+      "enums": {
+        "NoteStatus": {
+          "name": "NoteStatus",
+          "values": [
+            "active",
+            "inactive"
+          ]
+        }
+      },
       "nonModels": {}
     }
   },
   "storage": {
     "aws_region": "us-east-2",
-    "bucket_name": "amplify-test-apple-sandbo-amplifynotesdrivebucket1-cozfh7qtfwoz",
+    "bucket_name": "amplify-test-apple-sandbo-notesdrivebucket7aa671ee-lc7noi0t8xsc",
     "buckets": [
       {
-        "name": "amplifyNotesDrive",
-        "bucket_name": "amplify-test-apple-sandbo-amplifynotesdrivebucket1-cozfh7qtfwoz",
+        "name": "notesDriveBucket",
+        "bucket_name": "amplify-test-apple-sandbo-notesdrivebucket7aa671ee-lc7noi0t8xsc",
         "aws_region": "us-east-2",
         "paths": {
           "media/${cognito-identity.amazonaws.com:sub}/*": {
             "entityidentity": [
+              "get",
+              "list",
+              "write",
+              "delete"
+            ]
+          },
+          "media/*": {
+            "authenticated": [
               "get",
               "list",
               "write",
