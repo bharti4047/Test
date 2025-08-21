@@ -99,16 +99,6 @@
               "properties": {}
             },
             {
-              "type": "key",
-              "properties": {
-                "name": "notesByCreatedAt",
-                "queryField": "listNoteByCreatedAt",
-                "fields": [
-                  "createdAt"
-                ]
-              }
-            },
-            {
               "type": "auth",
               "properties": {
                 "rules": [

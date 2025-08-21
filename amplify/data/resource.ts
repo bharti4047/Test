@@ -9,9 +9,6 @@ const schema = a.schema({
       status: a.enum(['active', 'inactive']),
       createdAt: a.datetime()
     })
-    .secondaryIndexes(index => [
-      index('createdAt').name('notesByCreatedAt')
-    ])
     .authorization(allow => [allow.owner(), allow.authenticated().to(['read'])])
 });
 
